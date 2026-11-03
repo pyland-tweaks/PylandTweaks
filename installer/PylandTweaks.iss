@@ -51,6 +51,7 @@ Source: "..\deshaupdate.reg"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\haupdate.reg"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\assets\*"; DestDir: "{app}\assets"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\THIRD_PARTY_NOTICES.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Recursos\*"; DestDir: "{app}\Recursos"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\Apariencia\*"; DestDir: "{app}\Apariencia"; Flags: ignoreversion recursesubdirs createallsubdirs

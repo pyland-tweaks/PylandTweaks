@@ -40,6 +40,12 @@ La aplicación incluye:
 - Modo temporal seguro para pausar Defender y Windows Update sin borrar archivos
   ni renombrar librerías del sistema.
 
+## Vista previa
+
+<p align="center">
+  <img src="assets/captura.png" alt="Interfaz de PylandTweaks" width="900">
+</p>
+
 ## Características
 
 | Pestaña | Qué incluye |
