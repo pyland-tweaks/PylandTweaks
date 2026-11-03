@@ -1,0 +1,15 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.iss text eol=crlf
+*.reg text eol=crlf
+*.png binary
+*.ico binary
+*.exe binary
+*.pow binary
+*.sig binary
+*.dat binary
+*.lng binary

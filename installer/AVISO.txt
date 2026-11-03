@@ -1,0 +1,19 @@
+AVISO IMPORTANTE
+
+PylandTweaks modifica la configuracion de Windows para mejorar el rendimiento.
+Algunos cambios afectan servicios, tareas programadas, telemetria, Windows Update,
+Windows Defender y el registro del sistema.
+
+Antes de continuar:
+
+- Crea un punto de restauracion del sistema.
+- Guarda tu trabajo y cierra los programas abiertos.
+- Reinicia el equipo al terminar para aplicar los cambios.
+
+El modo temporal de Defender y Windows Update es reversible desde la pestana
+"Herramientas". Las opciones de desinstalacion NO revierten automaticamente las
+optimizaciones: usa la pestana "Reversion" dentro de la aplicacion antes de
+desinstalar.
+
+Este programa se distribuye "tal cual", sin garantias. No esta afiliado a
+Microsoft.
