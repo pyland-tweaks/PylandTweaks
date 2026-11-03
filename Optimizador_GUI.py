@@ -352,7 +352,6 @@ class OptimizadorApp:
         self.root.minsize(900, 680)
         self.root.configure(bg=BG)
 
-        self._build_background()
         self._setup_style()
         self._set_window_icon()
         self._build_header()
@@ -385,24 +384,7 @@ class OptimizadorApp:
         except tk.TclError:
             return None
 
-    def _build_background(self):
-        self.bg_canvas = tk.Canvas(self.root, bg=BG, highlightthickness=0, bd=0)
-        self.bg_canvas.place(x=0, y=0, relwidth=1, relheight=1)
-        img = self._load_photo("logo_bg.png")
-        if img is None:
-            return
-        self.bg_image = img
-        self.bg_item = self.bg_canvas.create_image(0, 0, anchor="nw", image=img)
-        self.bg_canvas.bind("<Configure>", self._place_background)
-
-    def _place_background(self, event):
-        if not hasattr(self, "bg_image"):
-            return
-        x = max(event.width - self.bg_image.width() - 18, 0)
-        y = max(event.height - self.bg_image.height() - 18, 0)
-        self.bg_canvas.coords(self.bg_item, x, y)
-
-    def _add_watermark(self, parent, relx=1.0, rely=1.0, anchor="se", subsample=1):
+    def _add_watermark(self, parent, relx=0.5, rely=0.5, anchor="center", subsample=2):
         img = self._load_photo("logo_bg.png")
         if img is None:
             return None
@@ -497,7 +479,6 @@ class OptimizadorApp:
     def _build_header(self):
         header = tk.Frame(self.root, bg=BG)
         header.pack(fill="x", padx=18, pady=(16, 8))
-        self._add_watermark(header, relx=0.62, rely=0.5, anchor="center", subsample=4)
 
         self.header_logo = self._load_photo("logo_48.png")
         if self.header_logo is None:
