@@ -59,6 +59,14 @@ def is_admin():
         return False
 
 
+def set_app_user_model_id():
+    try:
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
+            "PylandTweaks.PylandTweaks.5.8")
+    except Exception:
+        pass
+
+
 def run_as_admin():
     if getattr(sys, "frozen", False):
         params = ""
@@ -344,6 +352,7 @@ class OptimizadorApp:
         self.root.minsize(900, 680)
         self.root.configure(bg=BG)
 
+        self._build_background()
         self._setup_style()
         self._set_window_icon()
         self._build_header()
@@ -376,20 +385,58 @@ class OptimizadorApp:
         except tk.TclError:
             return None
 
+    def _build_background(self):
+        self.bg_canvas = tk.Canvas(self.root, bg=BG, highlightthickness=0, bd=0)
+        self.bg_canvas.place(x=0, y=0, relwidth=1, relheight=1)
+        img = self._load_photo("logo_bg.png")
+        if img is None:
+            return
+        self.bg_image = img
+        self.bg_item = self.bg_canvas.create_image(0, 0, anchor="nw", image=img)
+        self.bg_canvas.bind("<Configure>", self._place_background)
+
+    def _place_background(self, event):
+        if not hasattr(self, "bg_image"):
+            return
+        x = max(event.width - self.bg_image.width() - 18, 0)
+        y = max(event.height - self.bg_image.height() - 18, 0)
+        self.bg_canvas.coords(self.bg_item, x, y)
+
+    def _add_watermark(self, parent, relx=1.0, rely=1.0, anchor="se", subsample=1):
+        img = self._load_photo("logo_bg.png")
+        if img is None:
+            return None
+        if subsample > 1:
+            img = img.subsample(subsample)
+        canvas = tk.Canvas(parent, width=img.width(), height=img.height(),
+                           bg=BG, highlightthickness=0, bd=0)
+        canvas.place(relx=relx, rely=rely, anchor=anchor)
+        canvas.create_image(0, 0, anchor="nw", image=img)
+        canvas.image = img
+        return canvas
+
+    def _new_tab(self, title, padding=14):
+        tab = ttk.Frame(self.notebook, padding=padding)
+        self.notebook.add(tab, text=title)
+        self._add_watermark(tab)
+        return tab
+
     def _set_window_icon(self):
-        self.icon_img = self._load_photo("logo_64.png") or self._load_photo("logo.png")
-        if self.icon_img is not None:
-            try:
-                self.root.iconphoto(True, self.icon_img)
-                return
-            except tk.TclError:
-                pass
         ico = ASSETS / "app.ico"
+        ico_ok = False
         if ico.exists():
             try:
                 self.root.iconbitmap(default=str(ico))
+                ico_ok = True
             except tk.TclError:
                 pass
+        if not ico_ok:
+            self.icon_img = self._load_photo("logo_128.png") or self._load_photo("logo.png")
+            if self.icon_img is not None:
+                try:
+                    self.root.iconphoto(True, self.icon_img)
+                except tk.TclError:
+                    pass
 
     def _setup_style(self):
         style = ttk.Style(self.root)
@@ -450,6 +497,7 @@ class OptimizadorApp:
     def _build_header(self):
         header = tk.Frame(self.root, bg=BG)
         header.pack(fill="x", padx=18, pady=(16, 8))
+        self._add_watermark(header, relx=0.62, rely=0.5, anchor="center", subsample=4)
 
         self.header_logo = self._load_photo("logo_48.png")
         if self.header_logo is None:
@@ -543,8 +591,7 @@ class OptimizadorApp:
         return box
 
     def _build_tab_recomendado(self):
-        tab = ttk.Frame(self.notebook, padding=14)
-        self.notebook.add(tab, text="  Recomendado  ")
+        tab = self._new_tab("  Recomendado  ")
 
         ttk.Label(tab, text="Aplicar el paquete completo de optimizaciones recomendadas.",
                   style="Sub.TLabel").pack(anchor="w", pady=(0, 8))
@@ -574,8 +621,7 @@ class OptimizadorApp:
             "Consejo: crea un punto de restauracion antes de empezar.")
 
     def _build_tab_latencia(self):
-        tab = ttk.Frame(self.notebook, padding=14)
-        self.notebook.add(tab, text="  Latencia  ")
+        tab = self._new_tab("  Latencia  ")
 
         ttk.Label(tab, text="Ajustes seguros para reducir latencia y mejorar la respuesta en juegos.",
                   style="Sub.TLabel").pack(anchor="w", pady=(0, 8))
@@ -621,8 +667,7 @@ class OptimizadorApp:
                           "latencia para que se apliquen por completo.")
 
     def _build_tab_reversion(self):
-        tab = ttk.Frame(self.notebook, padding=14)
-        self.notebook.add(tab, text="  Reversion  ")
+        tab = self._new_tab("  Reversion  ")
 
         ttk.Label(tab, text="Deshace los cambios aplicados por el optimizador y vuelve a los valores de Windows.",
                   style="Sub.TLabel").pack(anchor="w", pady=(0, 8))
@@ -679,8 +724,7 @@ class OptimizadorApp:
                 sticky="nsew", padx=6, pady=6)
 
     def _build_tab_sistema(self):
-        tab = ttk.Frame(self.notebook, padding=14)
-        self.notebook.add(tab, text="  Sistema  ")
+        tab = self._new_tab("  Sistema  ")
         for i in range(2):
             tab.columnconfigure(i, weight=1)
 
@@ -726,8 +770,7 @@ class OptimizadorApp:
                 row=idx // 2, column=idx % 2, sticky="nsew", padx=6, pady=6)
 
     def _build_tab_apariencia(self):
-        tab = ttk.Frame(self.notebook, padding=14)
-        self.notebook.add(tab, text="  Apariencia  ")
+        tab = self._new_tab("  Apariencia  ")
         for i in range(2):
             tab.columnconfigure(i, weight=1)
 
@@ -755,8 +798,7 @@ class OptimizadorApp:
                 row=idx // 2, column=idx % 2, sticky="nsew", padx=6, pady=6)
 
     def _build_tab_recursos(self):
-        tab = ttk.Frame(self.notebook, padding=14)
-        self.notebook.add(tab, text="  Recursos  ")
+        tab = self._new_tab("  Recursos  ")
         for i in range(2):
             tab.columnconfigure(i, weight=1)
 
@@ -790,8 +832,7 @@ class OptimizadorApp:
                 row=idx // 2, column=idx % 2, sticky="nsew", padx=6, pady=6)
 
     def _build_tab_herramientas(self):
-        tab = ttk.Frame(self.notebook, padding=14)
-        self.notebook.add(tab, text="  Herramientas  ")
+        tab = self._new_tab("  Herramientas  ")
         for i in range(2):
             tab.columnconfigure(i, weight=1)
 
@@ -828,8 +869,7 @@ class OptimizadorApp:
                 sticky="nsew", padx=6, pady=6)
 
     def _build_tab_acerca(self):
-        tab = ttk.Frame(self.notebook, padding=18)
-        self.notebook.add(tab, text="  Acerca de  ")
+        tab = self._new_tab("  Acerca de  ", padding=18)
 
         card = tk.Frame(tab, bg=PANEL, highlightbackground=BORDER, highlightthickness=1)
         card.pack(fill="x")
@@ -1421,6 +1461,7 @@ class OptimizadorApp:
 
 
 def main():
+    set_app_user_model_id()
     if not is_admin():
         run_as_admin()
         sys.exit(0)
