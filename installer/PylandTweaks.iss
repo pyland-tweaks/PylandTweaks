@@ -1,7 +1,7 @@
 #define MyAppName "PylandTweaks"
 #define MyAppVersion "5.8"
 #define MyAppPublisher "PylandTweaks"
-#define MyAppURL "https://github.com/TU-USUARIO/PylandTweaks"
+#define MyAppURL "https://github.com/pyland-tweaks/PylandTweaks"
 #define MyAppExeName "PylandTweaks.exe"
 
 [Setup]

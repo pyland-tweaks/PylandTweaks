@@ -87,7 +87,7 @@ Es un único archivo: no requiere instalación ni Python.
 ### Opción 3: Desde el código
 
 ```powershell
-git clone https://github.com/TU-USUARIO/PylandTweaks.git
+git clone https://github.com/pyland-tweaks/PylandTweaks.git
 cd PylandTweaks
 python Optimizador_GUI.py
 ```
