@@ -177,6 +177,18 @@ Get-FileHash .\PylandTweaks_Setup_5.8.exe -Algorithm SHA256
 Compara el resultado con el valor publicado en la release. Si no coincide, no
 ejecutes el archivo.
 
+## Descargas
+
+Versión actual: **[v5.8](https://github.com/pyland-tweaks/PylandTweaks/releases/tag/v5.8)**
+
+| Archivo | Descripción |
+| --- | --- |
+| [PylandTweaks_Setup_5.8.exe](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.8/PylandTweaks_Setup_5.8.exe) | Instalador recomendado (incluye accesos directos y desinstalador). |
+| [PylandTweaks.exe](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.8/PylandTweaks.exe) | Ejecutable portable (sin instalación). |
+| [SHA256SUMS.txt](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.8/SHA256SUMS.txt) | Hashes SHA-256 para verificar las descargas. |
+
+[Ver todas las releases](https://github.com/pyland-tweaks/PylandTweaks/releases)
+
 ## Créditos
 
 - Inspirado en el trabajo de **Chris Titus Tech (WinUtil)**.
