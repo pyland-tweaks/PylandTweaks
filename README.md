@@ -6,14 +6,14 @@
 
 <p align="center">
   <strong>Optimizador de Windows para equipos de gama baja</strong><br>
-  Versión 5.8 &middot; Windows 10 / 11 (64 bits)
+  Versión 5.9 &middot; Windows 10 / 11 (64 bits)
 </p>
 
 <p align="center">
   <a href="../../releases/latest">
     <img alt="Descargar" src="https://img.shields.io/badge/descargar-%C3%BAltima%20versi%C3%B3n-7c5cff?style=for-the-badge">
   </a>
-  <img alt="Versión" src="https://img.shields.io/badge/version-5.8-4cc9f0?style=flat-square">
+  <img alt="Versión" src="https://img.shields.io/badge/version-5.9-4cc9f0?style=flat-square">
   <img alt="Plataforma" src="https://img.shields.io/badge/windows-10%20%7C%2011-3ddc97?style=flat-square">
   <img alt="Licencia" src="https://img.shields.io/badge/licencia-MIT-ffd166?style=flat-square">
 </p>
@@ -51,12 +51,15 @@ La aplicación incluye:
 | Pestaña | Qué incluye |
 | --- | --- |
 | **Recomendado** | Paquete completo: svchost, WiFi Sense, tareas de Update, telemetría, servicios, ajustes visuales, Teredo y caché DNS. |
+| **Gráficos** | Potato Graphics Studio con perfiles estilo NVIDIA Profile Inspector (Fortnite, CS2, GTA V, Minecraft y .exe personalizado), niveles Potato automáticos según GPU/RAM/CPU y copia de seguridad restaurable. |
 | **Latencia** | Plan Ultimate/High Performance, CPU al 100%, Game Mode, Game Bar/DVR off, pantalla completa y aceleración del ratón off. |
+| **Periféricos** | Optimizador de mouse y teclado con 129 ajustes declarativos, perfiles editables (`perfiles.json`), mira 1:1 sin aceleración, botón con la misma animación que Inicio y restauración completa. Incluye opción de juego para fijar la resolución de Fortnite (1680x1050 por defecto, editable) con backup, protección del ini como solo lectura, botón Comprobar y guía de estirado por GPU. También hay versión de consola en `Recursos/Periféricos/Optimizar perifericos.cmd`. |
 | **Reversión** | Restaura servicios, registro, tareas, prioridad de juegos, GameDVR, Teredo, Defender y Windows Update. |
 | **Sistema** | Servicios en manual/deshabilitados, telemetría, svchost, prioridad de juegos, calidad visual y apps en segundo plano. |
 | **Apariencia** | Tema oscuro/claro, transparencia, Cortana y Action Center. |
 | **Recursos** | Mem Reduct, compresión de RAM, plan de energía, InSpectre, prioridad de CPU, optimización de SSD, servicios y telemetría. |
 | **Herramientas** | Defender y Windows Update (activar/desactivar), modo temporal seguro, punto de restauración, archivos temporales, caché DNS y Teredo. |
+| **Macro** | **Edición rápida (un toque)**: con Fortnite en primer plano, pulsa G para editar al instante la pieza que miras (tecla y tiempos configurables). Tu F normal sigue intacta para editar y arrastrar con el ratón. En Opciones avanzadas siguen disponibles la tecla de edición, el Auto-Confirm, el modo solo clics, el truco FF + clic, la grabadora de teclas y clics, la reproducción en bucle y la parada con F4/END/SUPR/F8. F9 termina la grabación. |
 | **Acerca de** | Versión, créditos y consejos de seguridad. |
 
 También se incluye `Aplicar Optimizaciones.bat`, un menú por consola con las
@@ -71,9 +74,9 @@ mismas funciones principales.
 
 ## Instalación
 
-### Opción 1: Instalador (recomendado)
+### Opción 1: Instalador (última versión con instalador: v5.8)
 
-1. Entra en [Releases](../../releases/latest).
+1. Entra en la [release v5.8](https://github.com/pyland-tweaks/PylandTweaks/releases/tag/v5.8).
 2. Descarga `PylandTweaks_Setup_5.8.exe`.
 3. Ejecuta el instalador y acepta el aviso de UAC.
 4. Elige la carpeta y finaliza. Se crean accesos en el menú Inicio y, si quieres,
@@ -103,10 +106,11 @@ También puedes hacer doble clic en `PylandTweaks.bat`.
 ## Uso rápido
 
 1. Abre PylandTweaks como administrador.
-2. Ve a **Recomendado** y pulsa **Crear punto de restauración**.
-3. Pulsa **Aplicar optimizaciones recomendadas**.
-4. **Reinicia** el equipo cuando la aplicación lo indique.
-5. Si algo no te convence, abre **Reversión** y pulsa
+2. Elige **Modo Guiado** para responder 15 preguntas y aplicar las optimizaciones con resumen previo, o **Modo Avanzado** para usar las pestañas clásicas.
+3. Ve a **Recomendado** y pulsa **Crear punto de restauración**.
+4. Pulsa **Aplicar optimizaciones recomendadas**.
+5. **Reinicia** el equipo cuando la aplicación lo indique.
+6. Si algo no te convence, abre **Reversión** y pulsa
    **Revertir todas las optimizaciones**; después reinicia.
 
 > Deshabilitar Windows Defender deja el equipo sin protección antivirus.
@@ -152,13 +156,14 @@ Instala [Inno Setup 6](https://jrsoftware.org/isinfo.php) y ejecuta:
 .\build_installer.bat
 ```
 
-Resultado: `installer\Output\PylandTweaks_Setup_5.8.exe`.
+Resultado: `installer\Output\PylandTweaks_Setup_5.9.exe`.
 
 ## Estructura del proyecto
 
 ```text
 PylandTweaks/
 |-- Optimizador_GUI.py         # Aplicación Tkinter
+|-- perifericos.py             # Catálogo y motor de ajustes de mouse/teclado
 |-- Aplicar Optimizaciones.bat # Menú por consola
 |-- PylandTweaks.bat           # Lanzador desde el código
 |-- build_exe.bat              # Build del ejecutable
@@ -167,6 +172,7 @@ PylandTweaks/
 |-- assets/                    # Logo e iconos
 |-- Apariencia/                # Archivos .reg de apariencia
 |-- Recursos/                  # Herramientas y ajustes externos
+|   `-- Periféricos/           # Perfiles JSON y versión de consola (.cmd)
 |-- requirements-build.txt     # Dependencias solo para compilar
 |-- LICENSE
 `-- THIRD_PARTY_NOTICES.md
@@ -177,7 +183,7 @@ PylandTweaks/
 En PowerShell, dentro de la carpeta donde descargaste el archivo:
 
 ```powershell
-Get-FileHash .\PylandTweaks_Setup_5.8.exe -Algorithm SHA256
+Get-FileHash .\PylandTweaks.exe -Algorithm SHA256
 ```
 
 Compara el resultado con el valor publicado en la release. Si no coincide, no
@@ -185,13 +191,13 @@ ejecutes el archivo.
 
 ## Descargas
 
-Versión actual: **[v5.8](https://github.com/pyland-tweaks/PylandTweaks/releases/tag/v5.8)**
+Versión actual: **[v5.9](https://github.com/pyland-tweaks/PylandTweaks/releases/tag/v5.9)**
 
 | Archivo | Descripción |
 | --- | --- |
-| [PylandTweaks_Setup_5.8.exe](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.8/PylandTweaks_Setup_5.8.exe) | Instalador recomendado (incluye accesos directos y desinstalador). |
-| [PylandTweaks.exe](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.8/PylandTweaks.exe) | Ejecutable portable (sin instalación). |
-| [SHA256SUMS.txt](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.8/SHA256SUMS.txt) | Hashes SHA-256 para verificar las descargas. |
+| [PylandTweaks.exe](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.9/PylandTweaks.exe) | Ejecutable portable (sin instalación). |
+| [SHA256SUMS.txt](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.9/SHA256SUMS.txt) | Hash SHA-256 para verificar la descarga. |
+| [Instalador v5.8](https://github.com/pyland-tweaks/PylandTweaks/releases/download/v5.8/PylandTweaks_Setup_5.8.exe) | Último instalador publicado (v5.8). |
 
 [Ver todas las releases](https://github.com/pyland-tweaks/PylandTweaks/releases)
 

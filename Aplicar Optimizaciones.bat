@@ -1,5 +1,5 @@
 @echo off
-title PylandTweaks V5.8
+title PylandTweaks V5.9
 setlocal enabledelayedexpansion
 
 :: BatchGotAdmin

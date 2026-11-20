@@ -44,7 +44,7 @@ echo.
 echo ==========================================
 echo    Listo
 echo    Ejecutable: dist\PylandTweaks.exe
-echo    Instalador: installer\Output\PylandTweaks_Setup_5.8.exe
+echo    Instalador: installer\Output\PylandTweaks_Setup_5.9.exe
 echo ==========================================
 pause
 exit /b 0

@@ -1,8 +1,11 @@
 #define MyAppName "PylandTweaks"
-#define MyAppVersion "5.8"
+#define MyAppVersion "5.9"
 #define MyAppPublisher "PylandTweaks"
 #define MyAppURL "https://github.com/pyland-tweaks/PylandTweaks"
 #define MyAppExeName "PylandTweaks.exe"
+#ifndef BuildDir
+#define BuildDir "..\dist"
+#endif
 
 [Setup]
 AppId={{E4C7A1B2-9F3D-4E6A-8B5C-1D2E3F4A5B6C}
@@ -33,7 +36,7 @@ MinVersion=10.0
 CloseApplications=yes
 RestartApplications=no
 SetupLogging=yes
-VersionInfoVersion=5.8.0.0
+VersionInfoVersion=5.9.0.0
 VersionInfoCompany={#MyAppPublisher}
 VersionInfoDescription={#MyAppName} Setup
 VersionInfoCopyright=Copyright (C) 2026 {#MyAppPublisher}
@@ -45,7 +48,7 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Aplicar Optimizaciones.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\deshaupdate.reg"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\haupdate.reg"; DestDir: "{app}"; Flags: ignoreversion
